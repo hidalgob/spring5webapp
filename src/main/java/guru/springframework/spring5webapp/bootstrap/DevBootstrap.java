@@ -10,9 +10,6 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-/**
- * Created by jt on 5/16/17.
- */
 @Component
 public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -33,28 +30,35 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 
     private void initData(){
 
-        Publisher publisher = new Publisher();
-        publisher.setName("foo");
-        publisher.setAddress("12th Street, LA");
-        publisherRepository.save(publisher);
+    //Publisher BH
+    Publisher bh = new Publisher();
+    bh.setName("Bruno Hidalgo");
+    bh.setAddress("Rua dos Carocos");
+    publisherRepository.save(bh);
+
+    //Publisher SF
+    Publisher sf = new Publisher();
+    sf.setName("Sarah Forq");
+    sf.setAddress("Rua das ameixas");
+    publisherRepository.save(sf);
+
 
         //Eric
-        Author eric = new Author("Eric", "Evans");
-        Book  ddd = new Book("Domain Driven Design", "1234", publisher);
-        eric.getBooks().add(ddd);
-        ddd.getAuthors().add(eric);
+    Author eric = new Author("Eric", "Evans");
+    Book ddd = new Book("Domain Driven Design", "1234", bh);
+    eric.getBooks().add(ddd);
+    ddd.getAuthors().add(eric);
 
-        authorRepository.save(eric);
-        bookRepository.save(ddd);
+    authorRepository.save(eric);
+    bookRepository.save(ddd);
 
+    //Rod
+    Author rod = new Author("Rod", "Johnson");
+    Book noEJB = new Book("J2EE Development without EJB", "23444", sf);
+    rod.getBooks().add(noEJB);
 
-        //Rod
-        Author rod = new Author("Rod", "Johnson");
-        Book noEJB = new Book("J2EE Development without EJB", "23444", publisher );
-        rod.getBooks().add(noEJB);
-        noEJB.getAuthors().add(rod);
+    authorRepository.save(rod);
+    bookRepository.save(noEJB);
 
-        authorRepository.save(rod);
-        bookRepository.save(noEJB);
     }
 }
